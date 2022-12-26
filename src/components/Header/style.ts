@@ -1,9 +1,12 @@
 import styled from 'styled-components';
-import cover from '../../assets/Cover.jpg'
 
 export const Container = styled.div`
   position: relative;
 `;
+
+export const ContainerBGImage =styled.img`
+ width: 100%;
+`
 
 export const ContainerProfile = styled.div`
     position: absolute;
@@ -62,4 +65,5 @@ export const ProfileSocials = styled.div`
   display: flex;
   align-items: center;
   gap: 1.5rem;
+  margin-top: 1rem;
 `

@@ -1,6 +1,7 @@
 import React from "react";
 import {
   Container,
+  ContainerBGImage,
   ContainerProfile,
   ProfileBio,
   ProfileContent,
@@ -15,7 +16,7 @@ import SocialsLink from "../SocialsLink";
 export default function Header() {
   return (
     <Container>
-      <img src={Cover} alt='Imagem de fundo' />
+      <ContainerBGImage src={Cover} alt='Imagem de fundo' />
       <ContainerProfile>
         <ProfileImage src={avatar}/>
         <ProfileContent>
