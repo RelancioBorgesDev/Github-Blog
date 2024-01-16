@@ -1,14 +1,45 @@
-import Header from '../../components/Header'
-import HeaderPost from './components/HeaderPost'
-import { Container, TextContainer } from './style'
+import { useCallback, useEffect, useState } from "react";
+import Header from "../../components/Header";
+import { ProfileData } from "../../contexts/ProfileDataContext";
+import { useIssuesData } from "../../hooks/useIssuesData";
+import { useProfileData } from "../../hooks/useProfileData";
+import HeaderPost from "./components/HeaderPost";
+import { Container, TextContainer } from "./style";
+import { IPost } from "../../contexts/IssuesDataContext";
+import { useParams } from "react-router-dom";
+import { api } from "../../api/axios";
 
-export default function Post() {
+export default function Post({
+  avatar_url,
+  login,
+  company,
+  name,
+  bio,
+  followers,
+}: ProfileData) {
+  const [postData, setPostData] = useState<IPost>({} as IPost);
+  const { id } = useParams();
+  console.log(id);
+  const getPostDetails = useCallback(async () => {
+    try {
+      const response = await api.get(
+        `/repos/RelancioBorgesDev/IssuesExample_GithubBlog/issues/${id}`
+      );
+
+      setPostData(response.data);
+    } finally {
+    }
+  }, [postData]);
+
+  useEffect(() => {
+    getPostDetails();
+  }, []);
   return (
     <Container>
-      <Header children={<HeaderPost/>}/>
+      <Header children={<HeaderPost postData={postData} />} />
       <TextContainer>
-        <p>Lorem ipsum dolor sit amet consectetur adipisicing elit. Obcaecati eos corporis, quos error sequi nostrum amet nemo esse facere, officiis consequuntur inventore adipisci? Corporis omnis eveniet doloremque voluptates alias a. Lorem ipsum dolor sit amet consectetur, adipisicing elit. Quidem nemo consequatur libero repellendus, fugit quaerat. Consectetur, sequi, molestiae quo quibusdam labore excepturi eaque fuga pariatur ea officia velit ducimus voluptates!</p>
+        <p>{postData.body}</p>
       </TextContainer>
     </Container>
-  )
+  );
 }

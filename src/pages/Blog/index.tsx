@@ -5,11 +5,15 @@ import { CardsContainer, Container } from "./style";
 import PostCard from "./components/PostCard";
 import { Link } from "react-router-dom";
 import { useProfileData } from "../../hooks/useProfileData";
+import { useIssuesData } from "../../hooks/useIssuesData";
+import { useEffect } from "react";
 
 export default function Blog() {
-  const id = Math.random();
   const { profileData } = useProfileData();
-
+  const { issuesData, getPosts } = useIssuesData();
+  useEffect(() => {
+    getPosts();
+  }, []);
   return (
     <>
       <Header
@@ -25,11 +29,17 @@ export default function Blog() {
         }
       />
       <Container>
-        <SearchForm />
+        <SearchForm amount_posts={issuesData.length} getPosts={getPosts} />
         <CardsContainer>
-          <Link to={`/post/${id}`}>
-            <PostCard />
-          </Link>
+          {issuesData.map((issue) => (
+            <Link key={issue.number} to={`/post/${issue.number}`}>
+              <PostCard
+                body={issue.body}
+                title={issue.title}
+                created_at={issue.created_at}
+              />
+            </Link>
+          ))}
         </CardsContainer>
       </Container>
     </>

@@ -1,21 +1,23 @@
+import { IPost } from "../../../../contexts/IssuesDataContext";
+import { relativeDateFormatter } from "../../../../utils/formatDate";
 import { CardBriefText, CardHeader, Container } from "./style";
 
-export default function PostCard() {
+interface PostCardProps {
+  title: string;
+  body: string;
+  created_at: string;
+}
+
+export default function PostCard({ title, body, created_at }: PostCardProps) {
+  const formatedDate = relativeDateFormatter(created_at);
   return (
     <Container>
       <CardHeader>
-        <h2>JavaScript data types and data structures</h2>
-        <span>Há 1 dia</span>
+        <h2>{title}</h2>
+        <span>{formatedDate}</span>
       </CardHeader>
       <CardBriefText>
-        <p>
-          Programming languages all have built-in data structures, but these
-          often differ from one language to another. This article attempts to
-          list the built-in data structures available in JavaScript and what
-          properties they have. These can be used to build other data
-          structures. Wherever possible, comparisons with other languages are
-          drawn.
-        </p>
+        <p>{body}</p>
       </CardBriefText>
     </Container>
   );

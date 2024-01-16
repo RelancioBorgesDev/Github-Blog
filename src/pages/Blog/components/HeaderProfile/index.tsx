@@ -8,7 +8,6 @@ import {
   ProfileImage,
   ProfileSocials,
 } from "./style";
-import avatar from "../../../../assets/avatar.png";
 import { Buildings, GithubLogo, Users } from "phosphor-react";
 import { ProfileData } from "../../../../contexts/ProfileDataContext";
 
@@ -26,7 +25,7 @@ export default function HeaderProfile({
       <ProfileContent>
         <ProfileHeader>
           <h2>{name}</h2>
-          <Link text="GITHUB" />
+          <Link text="GITHUB" link="https://github.com/RelancioBorgesDev" />
         </ProfileHeader>
         <ProfileBio>{bio}</ProfileBio>
         <ProfileSocials>

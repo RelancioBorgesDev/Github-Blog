@@ -5,16 +5,19 @@ import Router from "./Router";
 import { GlobalStyles } from "./styles/globals";
 import { defaultTheme } from "./styles/themes/default";
 import { ProfileDataContextProvider } from "./contexts/ProfileDataContext";
+import { IssuesDataContextProvider } from "./contexts/IssuesDataContext";
 
 function App() {
   return (
     <BrowserRouter>
-      <ProfileDataContextProvider>
-        <ThemeProvider theme={defaultTheme}>
-          <GlobalStyles />
-          <Router />
-        </ThemeProvider>
-      </ProfileDataContextProvider>
+      <IssuesDataContextProvider>
+        <ProfileDataContextProvider>
+          <ThemeProvider theme={defaultTheme}>
+            <GlobalStyles />
+            <Router />
+          </ThemeProvider>
+        </ProfileDataContextProvider>
+      </IssuesDataContextProvider>
     </BrowserRouter>
   );
 }
