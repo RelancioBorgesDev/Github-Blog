@@ -1,20 +1,35 @@
-import React from "react";
 import Header from "../../components/Header";
-import Card from "./components/Card";
-import HeaderBlog from "./components/HeaderBlog";
+import HeaderBlog from "./components/HeaderProfile";
 import SearchForm from "./components/SearchForm";
 import { CardsContainer, Container } from "./style";
+import PostCard from "./components/PostCard";
+import { Link } from "react-router-dom";
+import { useProfileData } from "../../hooks/useProfileData";
 
 export default function Blog() {
+  const id = Math.random();
+  const { profileData } = useProfileData();
+
   return (
     <>
-      <Header children={<HeaderBlog />}/>
+      <Header
+        children={
+          <HeaderBlog
+            avatar_url={profileData?.avatar_url}
+            bio={profileData?.bio}
+            company={profileData?.company}
+            login={profileData?.login}
+            name={profileData?.name}
+            followers={profileData?.followers}
+          />
+        }
+      />
       <Container>
         <SearchForm />
         <CardsContainer>
-          <Card />
-          <Card />
-          <Card />
+          <Link to={`/post/${id}`}>
+            <PostCard />
+          </Link>
         </CardsContainer>
       </Container>
     </>

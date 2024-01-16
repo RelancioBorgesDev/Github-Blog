@@ -4,14 +4,17 @@ import Blog from "./pages/Blog";
 import Router from "./Router";
 import { GlobalStyles } from "./styles/globals";
 import { defaultTheme } from "./styles/themes/default";
+import { ProfileDataContextProvider } from "./contexts/ProfileDataContext";
 
 function App() {
   return (
     <BrowserRouter>
-      <ThemeProvider theme={defaultTheme}>
-        <GlobalStyles />
-        <Router />
-      </ThemeProvider>
+      <ProfileDataContextProvider>
+        <ThemeProvider theme={defaultTheme}>
+          <GlobalStyles />
+          <Router />
+        </ThemeProvider>
+      </ProfileDataContextProvider>
     </BrowserRouter>
   );
 }

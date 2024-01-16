@@ -1,6 +1,6 @@
 import { CardBriefText, CardHeader, Container } from "./style";
 
-export default function Card() {
+export default function PostCard() {
   return (
     <Container>
       <CardHeader>
